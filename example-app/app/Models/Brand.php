@@ -5,16 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Category extends Model
+class Brand extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'logo',
+        'description'
     ];
 
     /**
-     * Category có nhiều products
+     * Một brand có nhiều products
      */
     public function products()
     {

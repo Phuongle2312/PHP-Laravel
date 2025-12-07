@@ -5,25 +5,30 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class ProductImage extends Model
+class Review extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'product_id',
-        'image_url',
-        'is_primary'
-    ];
-
-    protected $casts = [
-        'is_primary' => 'boolean'
+        'user_id',
+        'rating',
+        'comment'
     ];
 
     /**
-     * ProductImage thuộc về một product
+     * Review thuộc về một product
      */
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    /**
+     * Review thuộc về một user
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

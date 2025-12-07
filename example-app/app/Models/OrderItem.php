@@ -5,22 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class ProductImage extends Model
+class OrderItem extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'order_id',
         'product_id',
-        'image_url',
-        'is_primary'
-    ];
-
-    protected $casts = [
-        'is_primary' => 'boolean'
+        'quantity',
+        'price'
     ];
 
     /**
-     * ProductImage thuộc về một product
+     * OrderItem thuộc về một order
+     */
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
+    /**
+     * OrderItem thuộc về một product
      */
     public function product()
     {
