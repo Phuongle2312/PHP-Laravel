@@ -8,40 +8,32 @@ use Illuminate\Notifications\Notifiable;
 
 class Product extends Model
 {
-    use HasFactory, Notifiable;
-    protected $table = 'products';
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
+    //bảng trong DB
+    protected $table = 'products';
+    
+    //Khóa chính
+    protected $primaryKey = 'product_code';
+
+    //Nếu dùng IDENTITY, Lavarel mặc định là incrementing = true, type int
+    public $incrementing = true;
+    protected $keyType = 'int';
+
+    //Nếu bảng không có created_at, updated_at
+    public $timestamps = false;
+
+    //Các cột được phép fill
     protected $fillable = [
         'product_name',
         'price',
-        'description',
+        'drescription',
     ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
-    protected $hidden = [
-        'product_code',
-        
-    ];
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
 }
