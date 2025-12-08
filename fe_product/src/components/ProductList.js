@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 function ProductList() {
+  const [products, setProducts] = useState([]);
   useEffect(() => {
     axios
       .get("http://127.0.0.1:8000/api/products")
@@ -14,7 +15,7 @@ function ProductList() {
   return (
     <div>
       <h1>Product List</h1>
-      {/* Product components will be rendered here */}
+      {}
     </div>
   );
 }
